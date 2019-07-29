@@ -330,6 +330,18 @@ static inline void cvl_image_copy(const CVLImageBuffer * const source_image,
 }
 
 
+
+/** Create new image and copy source image data. */
+static inline CVLImageBuffer cvl_image_create_copy(const CVLImageBuffer * const source_image,
+                                                   const CVLImageBytesCount pixel_size)
+{
+    assert(cvl_image_is_good(source_image, pixel_size));
+    CVLImageBuffer dest_image = cvl_image_create(source_image->height, source_image->width, pixel_size);
+    cvl_image_copy(source_image, &dest_image, pixel_size);
+    return dest_image;
+}
+
+
     
 /** Fill image with zeroes. */
 static inline void cvl_image_clear(const CVLImageBuffer * const image,
